@@ -2,8 +2,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => res.send('<h1>Hello World!</h1><a href="/users">Users</a>'));
+app.set('view engine', 'pug');
+app.set('views', './views');
 
-app.get('/users', (req, res) => res.send('Users'));
+app.get('/', (req, res) => res.render('index', { name: 'Tuong'}));
+app.get('/users', (req, res) => res.render('users/index', { users: [
+  { id: 1, name: 'Thinh' },
+  { id: 2, name: 'Hung' },
+  { id: 3, name: 'Tuong' }
+]}))
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
