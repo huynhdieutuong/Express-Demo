@@ -7,6 +7,9 @@ const users = [
   { id: 3, name: 'Tuong' }
 ];
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.set('view engine', 'pug');
 app.set('views', './views');
 
@@ -16,6 +19,12 @@ app.get('/users/search', (req, res) => {
   const { q } = req.query;
   const filtered = users.filter(user => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1);
   res.render('users/index', { users: filtered, value: q });
+});
+
+app.get('/users/create', (req, res) => res.render('users/create'));
+app.post('/users/create', (req, res) => {
+  users.push(req.body);
+  res.redirect('/users');
 })
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
