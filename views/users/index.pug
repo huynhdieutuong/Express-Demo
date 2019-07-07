@@ -1,16 +1,18 @@
-h1 Users
+extends ../layouts/common 
+block content
+  h1 Users
 
-a(href="/users/create") New
+  a(href="/users/create") New
 
-form(action="/users/search")
-  input(type="text", name="q", value=value)
-  button Search
+  form(action="/users/search")
+    input(type="text", name="q", value=value)
+    button Search
 
-ul
-  each user in users
-    li
-      span= user.name
-      span &nbsp;
-      a(href="/users/" + user.id) View
+  ul
+    each user in users
+      li
+        span= user.name
+        span &nbsp;
+        a(href="/users/" + user.id) View
 
-a(href="/") Home
+  a(href="/") Home
