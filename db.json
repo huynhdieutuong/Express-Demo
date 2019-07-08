@@ -1,33 +1,9 @@
 {
   "users": [
     {
-      "name": "Thinh",
-      "id": "6cd6f2d6-ecf4-49ee-bc16-08630d171edf"
-    },
-    {
-      "name": "Hung",
-      "id": "2d2faced-2a7f-4b07-8971-46493359b77d"
-    },
-    {
-      "name": "Tuong",
-      "id": "a77a0099-a0e3-4c10-aff0-5d704f562c89"
-    },
-    {
-      "name": "Huong",
-      "id": "520771dd-da5f-41bd-aab6-4cf0e4797da4"
-    },
-    {
-      "name": "Nokia 10",
-      "id": "32204d8f-1852-44a1-bcde-898303f833e2"
-    },
-    {
-      "name": "Huong",
-      "id": "124729f9-4838-4b10-af23-d49955b79047"
-    },
-    {
-      "name": "Huong",
-      "phone": "0932870970",
-      "id": "99d65441-b22a-45e0-bd6c-e64e81dbca4e"
+      "name": "Hoang",
+      "phone": "46464",
+      "id": "00231e29-c3fb-4351-a02b-e9cfad39a425"
     }
   ]
 }

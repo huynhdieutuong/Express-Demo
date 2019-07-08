@@ -1,8 +1,11 @@
 extends ../layouts/common 
 block content
   h1 Create User
+  if errors
+    each error in errors
+      .alert.alert-danger= error
   .row
     form.col-md-4(action="/users/create", method="POST")
-      input.form-control.mb-2(type="text", name="name", placeholder="Name")
-      input.form-control.mb-2(type="number", name="phone", placeholder="Phone")
+      input.form-control.mb-2(type="text", name="name", placeholder="Name", value= values ? values.name : '')
+      input.form-control.mb-2(type="number", name="phone", placeholder="Phone", value= values ? values.phone : '')
       button.btn.btn-primary Create
