@@ -1,16 +1,23 @@
 extends ../layouts/common 
 block content
-  h1 Users
+  h1 
+    span.mr-3 Users
+    a.btn.btn-primary(href="/users/create") New
 
-  a(href="/users/create") New
+  form.form-inline(action="/users/search")
+    input.form-control.mr-2(type="text", name="q", value=value)
+    button.btn.btn-primary Search
 
-  form(action="/users/search")
-    input(type="text", name="q", value=value)
-    button Search
-
-  ul
-    each user in users
-      li
-        span= user.name
-        span &nbsp;
-        a(href="/users/" + user.id) View
+  table.table
+    thead
+      tr
+        th Name
+        th Phone
+        th Action
+    tbody
+      each user in users
+        tr
+          td #{user.name}
+          td #{user.phone}
+          td
+            a.btn.btn-light(href="/users/" + user.id) View
