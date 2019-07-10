@@ -1,4 +1,5 @@
 const uuid = require('uuid');
+const md5 = require('md5');
 
 const db = require('../db');
 
@@ -15,7 +16,15 @@ module.exports.search = (req, res) => {
 module.exports.create = (req, res) => res.render('users/create');
 module.exports.postCreate = (req, res) => {
   req.body.id = uuid();
-  users.push(req.body);
+  const { id, name, phone, email, password} = req.body;
+  const hashedPassword = md5(password);
+  users.push({ 
+    id, 
+    name, 
+    phone, 
+    email, 
+    password: hashedPassword 
+  });
   db.write();
   res.redirect('/users');
 };

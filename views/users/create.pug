@@ -8,4 +8,7 @@ block content
     form.col-md-4(action="/users/create", method="POST")
       input.form-control.mb-2(type="text", name="name", placeholder="Name", value= values ? values.name : '')
       input.form-control.mb-2(type="number", name="phone", placeholder="Phone", value= values ? values.phone : '')
+      input.form-control.mb-2(type="email", name="email", placeholder="Email", value= values ? values.email : '')
+      input.form-control.mb-2(type="password", name="password", placeholder="Password")
+      input.form-control.mb-2(type="password", name="password2", placeholder="Password Confirmation")
       button.btn.btn-primary Create

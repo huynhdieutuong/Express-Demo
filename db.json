@@ -1,16 +1,11 @@
 {
   "users": [
     {
-      "name": "Hoang",
-      "phone": "46464",
-      "id": "00231e29-c3fb-4351-a02b-e9cfad39a425"
-    },
-    {
+      "id": "fa697526-2c72-4bd3-879c-edb7e8985087",
       "name": "Tuong",
-      "phone": "999999",
-      "id": "41d2932d-e036-4627-b4b5-5c05ee82b8b1",
+      "phone": "3454646",
       "email": "tuong@gmail.com",
-      "password": "12345"
+      "password": "827ccb0eea8a706c4c34a16891f84e7b"
     }
   ]
 }

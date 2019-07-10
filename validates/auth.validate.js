@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const db = require('../db');
 
 module.exports.postLogin = (req, res, next) => {
@@ -13,7 +14,7 @@ module.exports.postLogin = (req, res, next) => {
       if(!password) {
         errors.push('Password is empty');
       } else {
-        if(password !== user.password) {
+        if(md5(password) !== user.password) {
           errors.push('Password is wrong');
         }
       }
