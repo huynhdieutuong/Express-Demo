@@ -6,6 +6,13 @@
       "phone": "3454646",
       "email": "tuong@gmail.com",
       "password": "827ccb0eea8a706c4c34a16891f84e7b"
+    },
+    {
+      "id": "c462db7b-c8e7-466a-9bab-12bbff9296fc",
+      "name": "Huong",
+      "phone": "456461",
+      "email": "huong@gmail.com",
+      "password": "827ccb0eea8a706c4c34a16891f84e7b"
     }
   ]
 }
