@@ -2,7 +2,7 @@ const db = require('../db');
 const products = db.get('products').value();
 
 module.exports.index = (req, res) => {
-  let page = parseInt(req.query.page);
+  let page = parseInt(req.query.page) || 1;
   const perPage = 8;
 
   const start = (page - 1) * perPage;
@@ -16,27 +16,36 @@ module.exports.index = (req, res) => {
     page = maxPage;
   }
 
-  let arrPage = [];
+  let arrPage = [page - 1, page, page + 1];
   if(page === 1) {
     arrPage = [1, 2, 3];
-  } else {
-    if(page === maxPage) {
-      arrPage = [maxPage - 2, maxPage - 1, maxPage];
-    } else {
-      if(page > 1 || page < maxPage){
-        arrPage = [page - 1, page, page + 1];
-      }
-    }
-  };
+  }
+  if(page === maxPage) {
+    arrPage = [maxPage - 2, maxPage - 1, maxPage];
+  }
 
   const prevPage = (page === maxPage) ? arrPage[1] : arrPage[0];
   const nextPage = (page === 1) ? 2 : arrPage[2];
+
   res.render('products/index', { 
     products: products.slice(start, end),
+    pagination: true,
     arrPage,
     maxPage,
     page,
     prevPage,
     nextPage
   });
+};
+
+module.exports.search = (req, res) => {
+  const { q } = req.query;
+  const filtered = products.filter(
+    product => product.name.toLowerCase().indexOf(q.toLowerCase()) !== -1);
+  
+  res.render('products/index', {
+    products: filtered,
+    pagination: false,
+    value: q
+  })
 }

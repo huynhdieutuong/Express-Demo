@@ -5,15 +5,16 @@ block content
     form.form-inline(action="/products/search", method="get")
       input.form-control.mr-3(type="text", name="q", placeholder="Product Name")
       button.btn.btn-primary Search
-    nav
-    ul.pagination
-      li.page-item(class = (page === 1) ? 'disabled' : '')
-        a.page-link(href='?page=' + prevPage) Previous
-      each num in arrPage
-        li.page-item(class = (num === page) ? 'active' : '')
-          a.page-link(href='?page=' + num)= num
-      li.page-item(class = (page === maxPage) ? 'disabled' : '')
-        a.page-link(href='?page=' + nextPage) Next
+    if pagination
+      nav
+        ul.pagination
+          li.page-item(class = (page === 1) ? 'disabled' : '')
+            a.page-link(href='?page=' + prevPage) Previous
+          each num in arrPage
+            li.page-item(class = (num === page) ? 'active' : '')
+              a.page-link(href='?page=' + num)= num
+          li.page-item(class = (page === maxPage) ? 'disabled' : '')
+            a.page-link(href='?page=' + nextPage) Next
   .row
     if products
       each product in products
