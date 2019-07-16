@@ -17,13 +17,15 @@ module.exports.create = (req, res) => res.render('users/create');
 module.exports.postCreate = (req, res) => {
   req.body.id = uuid();
   const { id, name, phone, email, password} = req.body;
+  const avatar = '/uploads/' + req.file.filename;
   const hashedPassword = md5(password);
   users.push({ 
     id, 
     name, 
     phone, 
     email, 
-    password: hashedPassword 
+    password: hashedPassword,
+    avatar 
   });
   db.write();
   res.redirect('/users');

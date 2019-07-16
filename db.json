@@ -13,6 +13,14 @@
       "phone": "456461",
       "email": "huong@gmail.com",
       "password": "827ccb0eea8a706c4c34a16891f84e7b"
+    },
+    {
+      "id": "557d3571-6004-4e2c-9ebc-ef7080f2eb1c",
+      "name": "Tường",
+      "phone": "596565",
+      "email": "tuong1@gmail.com",
+      "password": "202cb962ac59075b964b07152d234b70",
+      "avatar": "/uploads/9e3310567164f3dc611a549690329da3"
     }
   ],
   "products": [

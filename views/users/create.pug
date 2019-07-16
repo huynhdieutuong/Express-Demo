@@ -5,10 +5,11 @@ block content
     each error in errors
       .alert.alert-danger= error
   .row
-    form.col-md-4(action="/users/create", method="POST")
+    form.col-md-4(action="/users/create", method="POST", enctype="multipart/form-data")
       input.form-control.mb-2(type="text", name="name", placeholder="Name", value= values ? values.name : '')
       input.form-control.mb-2(type="number", name="phone", placeholder="Phone", value= values ? values.phone : '')
       input.form-control.mb-2(type="email", name="email", placeholder="Email", value= values ? values.email : '')
       input.form-control.mb-2(type="password", name="password", placeholder="Password")
       input.form-control.mb-2(type="password", name="password2", placeholder="Password Confirmation")
+      input.mb-2(type="file", name="avatar")
       button.btn.btn-primary Create

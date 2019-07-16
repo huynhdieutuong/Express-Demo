@@ -1,6 +1,9 @@
+const db = require('../db');
+
 module.exports.postCreate = (req, res, next) => {
   let errors = [];
   const { name, phone, email, password, password2 } = req.body;
+  const user = db.get('users').find({ email }).value();
   if(!name) {
     errors.push('Empty Name');
   }
@@ -9,13 +12,13 @@ module.exports.postCreate = (req, res, next) => {
   }
   if(!email) {
     errors.push('Empty Email');
+  } else if (user) {
+    errors.push('Email already in use')
   }
   if(!password) {
     errors.push('Empty Password');
-  } else {
-    if(password !== password2) {
-      errors.push('Wrong Password Confirmation');
-    }
+  } else if(password !== password2) {
+    errors.push('Wrong Password Confirmation');
   }
 
   if(errors.length) {
