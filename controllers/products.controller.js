@@ -1,3 +1,4 @@
+const shortid = require('shortid');
 const db = require('../db');
 const products = db.get('products').value();
 
@@ -8,7 +9,7 @@ module.exports.index = (req, res) => {
   const start = (page - 1) * perPage;
   const end = page * perPage;
 
-  const maxPage = Math.ceil(products.length / perPage);
+  const maxPage = Math.ceil(products.length / perPage) || 3;
   if(page < 1) {
     page = 1;
   }
@@ -38,6 +39,24 @@ module.exports.index = (req, res) => {
   });
 };
 
+module.exports.create = (req, res) => res.render('products/create');
+module.exports.postCreate = (req, res) => {
+  req.body.id = shortid.generate();
+  const { id, name, description } = req.body;
+
+  let images = [];
+  req.files.forEach(image => images.push('/uploads/products/' + image.filename));
+  
+  products.push({
+    id,
+    name,
+    description,
+    images
+  });
+  db.write();
+  res.redirect('/products');
+};
+
 module.exports.search = (req, res) => {
   const { q } = req.query;
   const filtered = products.filter(
@@ -48,4 +67,12 @@ module.exports.search = (req, res) => {
     pagination: false,
     value: q
   })
-}
+};
+
+module.exports.view = (req, res) => {
+  const { id } = req.params;
+  const product = db.get('products').find({id}).value();
+  res.render('products/view', {
+    product
+  })
+};

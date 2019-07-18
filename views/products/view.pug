@@ -1,0 +1,25 @@
+extends ../layouts/common 
+block content
+  h1= product.name
+  .card.mb-3
+    #carouselExampleIndicators.carousel.slide(data-ride='carousel')
+      ol.carousel-indicators
+        each image, index in product.images
+          li(data-target='#carouselExampleIndicators', data-slide-to=index class=(index === 0) ? 'active' : '')
+
+      .carousel-inner
+        each image, index in product.images
+          .carousel-item(class=(index === 0) ? 'active' : '')
+            img.d-block.w-100.object-fit-cover(src=image, alt='...')
+        .carousel-item
+      a.carousel-control-prev(href='#carouselExampleIndicators', role='button', data-slide='prev')
+        span.carousel-control-prev-icon(aria-hidden='true')
+        span.sr-only Previous
+      a.carousel-control-next(href='#carouselExampleIndicators', role='button', data-slide='next')
+        span.carousel-control-next-icon(aria-hidden='true')
+        span.sr-only Next
+    .card-body
+      h5.card-title= product.name
+      p.card-text= product.description
+      a.btn.btn-primary(href="#") Add To Cart
+

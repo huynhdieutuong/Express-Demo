@@ -4,3 +4,7 @@
 .navbar-brand img {
   width: 30px;
 }
+.object-fit-cover {
+  object-fit: cover;
+  height: 600px;
+}

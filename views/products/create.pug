@@ -1,0 +1,8 @@
+extends ../layouts/common 
+block content
+  h1 Create product
+  form(action="/products/create", method="post", enctype="multipart/form-data")
+    input.form-control.mb-2(type="text", name="name", placeholder="Name")
+    textarea.form-control.mb-2(name="description", cols="30", rows="10")
+    input.form-control-file.mb-2(type="file", name="images", multiple)
+    button.btn.btn-primary Create

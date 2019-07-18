@@ -16,6 +16,8 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light.mb-4
           a.nav-link(href='/auth/login') Login
       else
         li.nav-item
-          a.nav-link(href='/auth/logout') Logout       
+          a.nav-link(href='/auth/logout') Logout    
+      li.nav-item
+        a.nav-link(href='/products') Products   
     if(user)
       span.navbar-text= user.name

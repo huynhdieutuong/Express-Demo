@@ -1,6 +1,8 @@
 extends ../layouts/common 
 block content
-  h1 Products
+  h1 
+    span.mr-3 Products
+    a.btn.btn-success(href="/products/create") New
   .d-flex.justify-content-between
     form.form-inline(action="/products/search", method="get")
       input.form-control.mr-3(type="text", name="q", placeholder="Product Name")
@@ -20,9 +22,9 @@ block content
       each product in products
         .col-md-3.mb-3
           .card
-            img.card-img-top(src=product.image, alt=product.name)
+            img.card-img-top(src=product.images[0], alt=product.name)
             .card-body
               h5.card-title= product.name
-              p.card-text= product.description
-              a.btn.btn-primary(href='#') Add To Cart
+              p.card-text= product.description.slice(0, 100) + ' ...'
+              a.btn.btn-primary(href='/products/' + product.id) See Detail
 
