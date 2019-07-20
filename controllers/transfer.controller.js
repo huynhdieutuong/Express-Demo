@@ -1,7 +1,7 @@
 const shortid = require('shortid');
 const db = require('../db');
 
-module.exports.create = (req, res) => res.render('transfer/create');
+module.exports.create = (req, res) => res.render('transfer/create', {csrfToken: req.csrfToken()});
 
 module.exports.postCreate = (req, res) => {
   const { accountId, amount } = req.body;

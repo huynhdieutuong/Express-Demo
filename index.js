@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const csrf = require('csurf');
 
 const usersRoute = require('./routes/users.route');
 const authRoute = require('./routes/auth.route');
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionMiddleware);
+app.use(csrf({ cookie: true }));
 
 app.set('view engine', 'pug');
 app.set('views', './views');
