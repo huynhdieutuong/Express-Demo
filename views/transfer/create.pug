@@ -1,0 +1,7 @@
+extends ../layouts/common 
+block content
+  h1 Transfer
+  form(action="/transfer/create", method="post")
+    input.form-control.mb-2(type="text" placeholder="AccountId" name="accountId")
+    input.form-control.mb-2(type="number" placeholder="Amount" name="amount")
+    button.btn.btn-primary Transfer

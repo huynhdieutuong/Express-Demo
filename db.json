@@ -48,5 +48,16 @@
     }
   ],
   "sessions": [
+    {
+      "id": "76d72b2e-6a95-4060-9e05-e49d1455d0e8"
+    }
+  ],
+  "transfers": [
+    {
+      "id": "oLfFNVAX0",
+      "accountId": "fsfkshfsk313",
+      "amount": 200000,
+      "userId": "fa697526-2c72-4bd3-879c-edb7e8985087"
+    }
   ]
 }
