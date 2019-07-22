@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
   }
 
   // Show totalCart
-  const session = await Session.findById(sessionId);
+  const session = await Session.findById(sessionId) || {};
   const { cart } = session;
   let totalCart = 0;
   for(const product in cart) {
