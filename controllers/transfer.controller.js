@@ -1,18 +1,16 @@
-const shortid = require('shortid');
-const db = require('../db');
+const Transfer = require('../models/transfer.model');
 
 module.exports.create = (req, res) => res.render('transfer/create', {csrfToken: req.csrfToken()});
 
-module.exports.postCreate = (req, res) => {
+module.exports.postCreate = async (req, res) => {
   const { accountId, amount } = req.body;
   const { userId } = req.signedCookies;
 
-  db.get('transfers').push({
-    id: shortid.generate(),
+  await Transfer.create({
     accountId,
     amount: parseInt(amount),
     userId
-  }).write();
+  });
 
   res.redirect('/transfer/create');
 }

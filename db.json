@@ -61,5 +61,12 @@
       "id": "3d86c40c-06a7-4505-85f0-a432b9f23550"
     }
   ],
-  "transfers": []
+  "transfers": [
+    {
+      "id": "Dh-ryKSpR",
+      "accountId": "tuong123",
+      "amount": 100000,
+      "userId": "fa697526-2c72-4bd3-879c-edb7e8985087"
+    }
+  ]
 }

@@ -3,6 +3,9 @@ require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const csrf = require('csurf');
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true});
 
 const usersRoute = require('./routes/users.route');
 const authRoute = require('./routes/auth.route');
@@ -22,7 +25,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(sessionMiddleware);
-app.use(csrf({ cookie: true }));
 
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -33,6 +35,6 @@ app.use('/users', authMiddleware.requireAuth, usersRoute);
 app.use('/auth', authMiddleware.loggedIn, authRoute);
 app.use('/products', productsRoute);
 app.use('/cart', cartRoute);
-app.use('/transfer', authMiddleware.requireAuth, transferRoute);
+app.use('/transfer', authMiddleware.requireAuth, csrf({ cookie: true }), transferRoute);
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));

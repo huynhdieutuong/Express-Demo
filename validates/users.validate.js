@@ -1,9 +1,9 @@
-const db = require('../db');
+const User = require('../models/user.model');
 
-module.exports.postCreate = (req, res, next) => {
+module.exports.postCreate = async (req, res, next) => {
   let errors = [];
   const { name, phone, email, password, password2 } = req.body;
-  const user = db.get('users').find({ email }).value();
+  const user = await User.findOne({ email });
   if(!name) {
     errors.push('Empty Name');
   }

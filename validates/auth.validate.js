@@ -1,10 +1,10 @@
 const md5 = require('md5');
-const db = require('../db');
+const User = require('../models/user.model');
 
-module.exports.postLogin = (req, res, next) => {
+module.exports.postLogin = async (req, res, next) => {
   let errors = [];
   const { email, password } = req.body;
-  const user = db.get('users').find({ email }).value();
+  const user = await User.findOne({ email });
   if(!email) {
     errors.push('Email is empty');
   } else {

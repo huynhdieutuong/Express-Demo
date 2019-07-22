@@ -1,8 +1,7 @@
-const shortid = require('shortid');
-const db = require('../db');
-const products = db.get('products').value();
+const Product = require('../models/product.model');
 
-module.exports.index = (req, res) => {
+module.exports.index = async (req, res) => {
+  const products = await Product.find();
   let page = parseInt(req.query.page) || 1;
   const perPage = 8;
 
@@ -40,24 +39,23 @@ module.exports.index = (req, res) => {
 };
 
 module.exports.create = (req, res) => res.render('products/create');
-module.exports.postCreate = (req, res) => {
-  req.body.id = shortid.generate();
-  const { id, name, description } = req.body;
+module.exports.postCreate = async (req, res) => {
+  const { name, description } = req.body;
 
   let images = [];
   req.files.forEach(image => images.push('/uploads/products/' + image.filename));
   
-  products.push({
-    id,
+  const product = {
     name,
     description,
     images
-  });
-  db.write();
+  };
+  await Product.create(product);
   res.redirect('/products');
 };
 
-module.exports.search = (req, res) => {
+module.exports.search = async (req, res) => {
+  const products = await Product.find();
   const { q } = req.query;
   const filtered = products.filter(
     product => product.name.toLowerCase().indexOf(q.toLowerCase()) !== -1);
@@ -69,9 +67,9 @@ module.exports.search = (req, res) => {
   })
 };
 
-module.exports.view = (req, res) => {
+module.exports.view = async (req, res) => {
   const { id } = req.params;
-  const product = db.get('products').find({id}).value();
+  const product = await Product.findById(id);
   res.render('products/view', {
     product
   })

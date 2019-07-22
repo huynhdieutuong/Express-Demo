@@ -1,38 +1,36 @@
-const uuid = require('uuid');
 const md5 = require('md5');
 
-const db = require('../db');
+const User = require('../models/user.model');
 
-const users = db.get('users').value();
+module.exports.index = async (req, res) => {
+  const users = await User.find();
+  res.render('users/index', { users })
+};
 
-module.exports.index = (req, res) => res.render('users/index', { users });
-
-module.exports.search = (req, res) => {
+module.exports.search = async (req, res) => {
+  const users = await User.find();
   const { q } = req.query;
   const filtered = users.filter(user => user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1);
   res.render('users/index', { users: filtered, value: q });
 };
 
 module.exports.create = (req, res) => res.render('users/create');
-module.exports.postCreate = (req, res) => {
-  req.body.id = uuid();
+module.exports.postCreate = async (req, res) => {
   const { id, name, phone, email, password} = req.body;
   const avatar = '/uploads/' + req.file.filename;
-  const hashedPassword = md5(password);
-  users.push({ 
-    id, 
+  const user = { 
     name, 
     phone, 
     email, 
-    password: hashedPassword,
+    password: md5(password),
     avatar 
-  });
-  db.write();
+  };
+  await User.create(user);
   res.redirect('/users');
 };
 
-module.exports.view = (req, res) => {
+module.exports.view = async (req, res) => {
   const { id } = req.params;
-  const user = db.get('users').find({ id }).value();
+  const user = await User.findById(id);
   res.render('users/view', { user });
 };
