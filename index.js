@@ -13,6 +13,9 @@ const productsRoute = require('./routes/products.route');
 const cartRoute = require('./routes/cart.route');
 const transferRoute = require('./routes/transfer.route');
 
+const apiUsersRoute = require('./api/routes/users.route');
+const apiProductsRoute = require('./api/routes/products.route');
+
 const authMiddleware = require('./middlewares/auth.middleware');
 const sessionMiddleware = require('./middlewares/session.middleware');
 
@@ -24,11 +27,14 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(sessionMiddleware);
 
 app.set('view engine', 'pug');
 app.set('views', './views');
 
+app.use('/api/users', apiUsersRoute);
+app.use('/api/products', apiProductsRoute);
+
+app.use(sessionMiddleware);
 app.get('/', (req, res) => res.render('index', { name: 'Tuong' }));
 
 app.use('/users', authMiddleware.requireAuth, usersRoute);
@@ -36,5 +42,6 @@ app.use('/auth', authMiddleware.loggedIn, authRoute);
 app.use('/products', productsRoute);
 app.use('/cart', cartRoute);
 app.use('/transfer', authMiddleware.requireAuth, csrf({ cookie: true }), transferRoute);
+
 
 app.listen(port, () => console.log(`Server is listening on port ${port}`));
